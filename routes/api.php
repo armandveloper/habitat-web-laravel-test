@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,11 +17,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'auth'], function () {
-    Route::post('signup', [AuthController::class, 'signUp']);
-    Route::post('login', [AuthController::class, 'login'])->name('login');
+  Route::post('signup', [AuthController::class, 'signUp']);
+  Route::post('login', [AuthController::class, 'login'])->name('login');
 
-    Route::get('logout', [AuthController::class, 'logout'])
-        ->middleware('auth:api');
+  Route::get('logout', [AuthController::class, 'logout'])
+    ->middleware('auth:api');
 });
 
 // Products
@@ -29,5 +30,12 @@ Route::group(['prefix' => 'auth'], function () {
 Route::get('products', [ProductController::class, 'index']);
 
 Route::group(['prefix' => 'products', 'middleware' => 'auth:api'], function () {
-    Route::post('', [ProductController::class, 'store']);
+  Route::post('', [ProductController::class, 'store']);
+});
+
+
+// Profile
+
+Route::group(['prefix' => 'profile', 'middleware' => 'auth:api'], function () {
+  Route::get('', [ProfileController::class, 'index']);
 });
