@@ -38,4 +38,5 @@ Route::group(['prefix' => 'products', 'middleware' => 'auth:api'], function () {
 
 Route::group(['prefix' => 'profile', 'middleware' => 'auth:api'], function () {
   Route::get('', [ProfileController::class, 'index']);
+  Route::get('purchases', [ProfileController::class, 'getPurchases']);
 });

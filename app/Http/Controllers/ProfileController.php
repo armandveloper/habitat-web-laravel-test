@@ -32,4 +32,20 @@ class ProfileController extends Controller
       'products' => $products,
     ]);
   }
+
+  /**
+   * getPurchases of profile
+   * 
+   * Return the purchases of the logged in user
+   * 
+   */
+
+  public function getPurchases(Request $request)
+  {
+    $purchases = $request->user()->transactions;
+
+    return $this->showOne([
+      'purchases' => $purchases,
+    ]);
+  }
 }
